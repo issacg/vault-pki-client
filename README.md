@@ -16,6 +16,10 @@ secrets.
 
 ## Installation
 
+If you have node.js installed, simply `npm -g vault-pki-client`
+
+If you don't have node.js installed, you can [download a binary package](https://github.com/issacg/vault-pki-client/releases/latest)
+
 ## Configuration
 
 ### Methods
