@@ -1,0 +1,17 @@
+.DS_Store
+release
+temp
+history
+remote-do-not-distribute
+.DS_Store
+/.idea
+node_modules
+/newrelic_agent.log
+/scripts/output
+/*.komodoproject
+*.pem
+*.key
+.otto
+.ottoid
+.vagrant
+npm-debug*
