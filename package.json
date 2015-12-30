@@ -28,7 +28,9 @@
     "runtime": {
       "framework": "nodejs",
       "version": "4.2.4",
-      "ignoreFlags": true
+      "ignoreFlags": true,
+      "nodeConfigureArgs": ["--fully-static"],
+      "nodeMakeArgs": ["-j","4"]
     }
   },
   "repository": {
