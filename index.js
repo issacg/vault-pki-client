@@ -7,7 +7,8 @@ var debug = require('debug')('vault-pki-client:main'),
     request = require('request-promise'),
     pkginfo = require('./package.json'),
     child = Promise.promisifyAll(require('child_process')),
-    fs = Promise.promisifyAll(require('fs'));
+    fs = Promise.promisifyAll(require('fs')),
+    MAX_TIMEOUT = 0x7FFFFFFF; // http://nodejs.org/api/all.html#all_settimeout_cb_ms
 
 var token = config.vault.token;
 function main() {
@@ -49,6 +50,10 @@ var fetchCert = (function() {
             ]).then(function() {
                 if (config.once) return Promise.resolve();
                 var next = data.lease_duration * config.renewalCoefficient * 1000;
+                if (next > MAX_TIMEOUT) {
+                    debug("Renewal of " + next + "ms is longer than max timer of " + MAX_TIMEOUT + "ms.  Truncating");
+                    next = MAX_TIMEOUT;
+                }
                 debug("Next renewal in " + next + "ms");
                 setTimeout(fetchCert, next);
             }).then(function() {
@@ -91,6 +96,10 @@ var renewVaultToken = (function() {
             debug("Token renewal succeeded");
             if (data.auth.renewable) {
                 var next = data.auth.lease_duration * config.renewalCoefficient * 1000;
+                if (next > MAX_TIMEOUT) {
+                    debug("Renewal of " + next + "ms is longer than max timer of " + MAX_TIMEOUT + "ms.  Truncating");
+                    next = MAX_TIMEOUT;
+                }
                 debug("Next renewal in " + next + "ms");
                 setTimeout(renewVaultToken, next).unref();
             }
