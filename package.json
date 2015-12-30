@@ -1,6 +1,6 @@
 {
   "name": "vault-pki-client",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Tool to manage a keypair provided by HashiCorp Vault",
   "main": "index.js",
   "scripts": {
