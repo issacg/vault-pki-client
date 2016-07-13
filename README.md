@@ -44,6 +44,8 @@ For more detailed information about how to set parameters, see the [rc](https://
 | `vault.token` | None | The token used to authenticate to the Vault server. |
 | `vault.token-renewable` | `false` | If `true`, vault-pki-client will attempt to renew the token based on the TTL of the token. The token will be renewed immediately on startup to determine the TTL. |
 | `certCN` | The hostname of the machine running vault-pki-client | The Common Name (CN) to be used in the requested x509 keypair.  For example, `foo.example.com`.  The value specified here must be a valid CN based on the role defined in `vault.pki.role` or the request will be rejected by the Vault server. |
+| `certAltNames` | `[]` | Subject Alternative Names to request in the cert. These are in addition to the value of `certCN`. Any values specified must be a valid CN based on the role defined in `vault.pki.role` or the entire request will be denied. |
+| `certIPs` | `[]` | IP Subject Alternative Name to request in the cert. The role defined in `vault.pki.role` must allow IP SANs or the entire request will be denied. |
 | `certTTL` | None | The TTL of the keypair being requested by the Vault server.  In a production environment, this should normally be kept to a reasonably low value.  See [the Vault documentation](https://vaultproject.io/docs/secrets/pki/index.html).  If not specified, the Vault server will use the configured default lease TTL.  Note that the value specified may not exceed the maximum TTL defined on the Vault server mount. |
 | `certFile` | `client.pem` | The file to store the x509 certificate returned by the Vault server. |
 | `keyFile` | `client.key` | The file to store the private key for the certificate returned by the Vault server. |

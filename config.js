@@ -16,6 +16,8 @@ var defaults = {
         "token-renewable": false
     },
     certCN: require("os").hostname(),
+    certAltNames: [],
+    certIPs: [],
     certTTL: undefined,
     certFile: "client.pem",
     keyFile: "client.key",
