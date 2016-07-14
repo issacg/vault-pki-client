@@ -118,7 +118,8 @@ var renewVaultToken = (function() {
 function buildReqOpts() {
     var reqOpts = {
         ca:[],
-        rejectUnauthorized: !config.vault.server["tls-skip-verify"]
+        rejectUnauthorized: !config.vault.server["tls-skip-verify"],
+        followAllRedirects: false
     };
 
     if (config.vault.server["ca-path"]) {
