@@ -39,7 +39,9 @@ var fetchCert = (function() {
         var path = [config.vault.pki.path, "issue", config.vault.pki.role].join("/");
         debug("Attempting to fetch a keypair from " + path);
         var opts = {
-            common_name: config.certCN
+            common_name: config.certCN,
+            alt_names: config.certAltNames.join(","),
+            ip_sans: config.certIPs.join(",")
         }
         if (config.certTTL) opts.ttl = config.certTTL;
         return vaultRequest(path, 'POST', opts).then(function(data) {
